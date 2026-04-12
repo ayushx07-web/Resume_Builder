@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.scheduling.annotation.Async;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
 
@@ -20,6 +21,7 @@ public class EmailService {
     @Value("${app.name:Resume Builder}")
     private String appName;
 
+    @Async
     public void sendVerificationEmail(String toEmail, String username, String verificationCode) {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();
@@ -49,8 +51,17 @@ public class EmailService {
 
             helper.setText(htmlContent, true);
             javaMailSender.send(message);
+            System.out.println("Verification email sent successfully to: " + toEmail);
         } catch (MessagingException e) {
+            System.err.println("CRITICAL: MessagingException while sending email to " + toEmail);
+            System.err.println("Error Message: " + e.getMessage());
+            e.printStackTrace();
             throw new RuntimeException("Failed to send verification email: " + e.getMessage(), e);
+        } catch (Exception e) {
+            System.err.println("CRITICAL: Unexpected error while sending email to " + toEmail);
+            System.err.println("Error details: " + e.getClass().getName() + " - " + e.getMessage());
+            e.printStackTrace();
+            throw e;
         }
     }
 }

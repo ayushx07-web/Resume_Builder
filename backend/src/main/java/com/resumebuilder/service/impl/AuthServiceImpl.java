@@ -151,6 +151,11 @@ public class AuthServiceImpl implements AuthService {
         user.setResetTokenExpiry(LocalDateTime.now().plusMinutes(15));
         userRepository.save(user);
 
-        emailService.sendVerificationEmail(user.getEmail(), user.getUsername(), newCode);
+        try {
+            emailService.sendVerificationEmail(user.getEmail(), user.getUsername(), newCode);
+        } catch (Exception e) {
+            // Log but don't fail the request since email sending is now async/background
+            System.err.println("Failed to send verification email: " + e.getMessage());
+        }
     }
 }

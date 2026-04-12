@@ -84,7 +84,11 @@ public class SecurityConfig {
         if (allowedOrigins != null && !allowedOrigins.isEmpty()) {
             configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
         } else {
-            configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+            configuration.setAllowedOrigins(Arrays.asList(
+                "http://localhost:3000",
+                "http://localhost:5173",
+                "https://resume-builder-lake-beta.vercel.app"
+            ));
         }
         
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
