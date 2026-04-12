@@ -1,0 +1,65 @@
+resume-builder/
+├── backend/                          # Spring Boot Application
+│   ├── src/
+│   │   ├── main/
+│   │   │   ├── java/com/resumebuilder/
+│   │   │   │   ├── ResumeBuilderApplication.java
+│   │   │   │   ├── config/
+│   │   │   │   │   ├── SecurityConfig.java
+│   │   │   │   │   ├── SwaggerConfig.java
+│   │   │   │   │   ├── JwtAuthenticationFilter.java
+│   │   │   │   │   └── CorsConfig.java
+│   │   │   │   ├── controller/
+│   │   │   │   │   ├── AuthController.java
+│   │   │   │   │   ├── ResumeController.java
+│   │   │   │   │   ├── TemplateController.java
+│   │   │   │   │   ├── PaymentController.java
+│   │   │   │   │   └── AdminController.java
+│   │   │   │   ├── dto/
+│   │   │   │   │   ├── request/
+│   │   │   │   │   └── response/
+│   │   │   │   ├── entity/
+│   │   │   │   │   ├── User.java
+│   │   │   │   │   ├── Resume.java
+│   │   │   │   │   ├── Template.java
+│   │   │   │   │   ├── Payment.java
+│   │   │   │   │   └── Subscription.java
+│   │   │   │   ├── repository/
+│   │   │   │   ├── service/
+│   │   │   │   ├── exception/
+│   │   │   │   ├── mapper/
+│   │   │   │   └── util/
+│   │   │   └── resources/
+│   │   │       ├── application.properties
+│   │   │       ├── application-dev.properties
+│   │   │       ├── application-prod.properties
+│   │   │       └── db/migration/
+│   │   └── test/
+│   ├── pom.xml
+│   ├── Dockerfile
+│   └── .dockerignore
+├── frontend/                         # React Application
+│   ├── public/
+│   ├── src/
+│   │   ├── components/
+│   │   ├── pages/
+│   │   ├── services/
+│   │   ├── redux/
+│   │   ├── utils/
+│   │   ├── context/
+│   │   ├── hooks/
+│   │   ├── styles/
+│   │   ├── App.jsx
+│   │   └── main.jsx
+│   ├── package.json
+│   ├── vite.config.js
+│   ├── Dockerfile
+│   ├── .dockerignore
+│   └── .env.example
+├── database/
+│   ├── schema.sql
+│   ├── seed-data.sql
+│   └── er-diagram.png
+├── docker-compose.yml
+├── .env.example
+└── README.md
