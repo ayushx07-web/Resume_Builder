@@ -59,7 +59,7 @@ public class Resume {
      * }
      */
     @JdbcTypeCode(SqlTypes.JSON)
-    @Column(columnDefinition = "json", nullable = false)
+    @Column(nullable = false)
     @Builder.Default
     private String content = "{}";
 
