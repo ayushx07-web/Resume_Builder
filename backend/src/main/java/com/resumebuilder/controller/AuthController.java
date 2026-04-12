@@ -22,6 +22,28 @@ import java.util.Map;
 public class AuthController {
 
     private final AuthService authService;
+    private final org.springframework.mail.javamail.JavaMailSender javaMailSender;
+
+    @GetMapping("/test-email")
+    public ResponseEntity<String> testEmail(@RequestParam String to) {
+        try {
+            org.springframework.mail.SimpleMailMessage message = new org.springframework.mail.SimpleMailMessage();
+            message.setTo(to);
+            message.setSubject("SMTP Diagnostic Test");
+            message.setText("If you are receiving this, your Render SMTP settings are 100% correct!");
+            javaMailSender.send(message);
+            return ResponseEntity.ok("Email sent successfully to " + to + ". Check your inbox!");
+        } catch (Exception e) {
+            StringBuilder error = new StringBuilder(e.getMessage() + "\n");
+            Throwable cause = e.getCause();
+            while (cause != null) {
+                error.append("Caused by: ").append(cause.getMessage()).append("\n");
+                cause = cause.getCause();
+            }
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("SMTP FAILURE DIAGNOSTIC:\n\n" + error.toString());
+        }
+    }
 
     @PostMapping("/signup")
     @Operation(summary = "Register new user", description = "Create a new user account and send verification email")
