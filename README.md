@@ -455,7 +455,7 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 
 ## 📧 Support
 
-For support, email support@resumebuilder.com or open an issue on GitHub.
+For support, email kandpalayush4@gmail.com or open an issue on GitHub.
 
 ## 🙏 Acknowledgments
 
@@ -467,4 +467,4 @@ For support, email support@resumebuilder.com or open an issue on GitHub.
 
 ---
 
-**Built with ❤️ by Resume Builder Team**
+**Built with ❤️ by ayushx07-web**
