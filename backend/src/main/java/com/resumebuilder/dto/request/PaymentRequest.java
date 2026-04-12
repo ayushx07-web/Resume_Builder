@@ -16,6 +16,7 @@ public class PaymentRequest {
     @NotNull(message = "Amount is required")
     private BigDecimal amount;
     
+    @Builder.Default
     private String currency = "INR";
     
     @NotBlank(message = "Payment type is required")

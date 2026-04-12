@@ -60,9 +60,11 @@ public class Resume {
      */
     @JdbcTypeCode(SqlTypes.JSON)
     @Column(columnDefinition = "json", nullable = false)
+    @Builder.Default
     private String content = "{}";
 
     @Column(name = "is_draft")
+    @Builder.Default
     private Boolean isDraft = true;
 
     @Column(name = "last_saved_at")

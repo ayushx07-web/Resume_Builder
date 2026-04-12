@@ -33,5 +33,6 @@ public class TemplateRequest {
     
     private String configuration;
     
+    @Builder.Default
     private Boolean isActive = true;
 }

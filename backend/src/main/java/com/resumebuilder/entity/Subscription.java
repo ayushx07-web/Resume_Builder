@@ -43,6 +43,7 @@ public class Subscription {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
+    @Builder.Default
     private SubscriptionStatus status = SubscriptionStatus.ACTIVE;
 
     @Column(name = "start_date", nullable = false)
@@ -52,6 +53,7 @@ public class Subscription {
     private LocalDateTime endDate;
 
     @Column(name = "auto_renew")
+    @Builder.Default
     private Boolean autoRenew = false;
 
     @Column(precision = 10, scale = 2)
