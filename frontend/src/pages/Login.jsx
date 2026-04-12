@@ -3,6 +3,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, Link } from 'react-router-dom';
 import { loginStart, loginSuccess, loginFailure } from '../redux/slices/authSlice';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { toast } from 'react-toastify';
 
 export default function Login() {
@@ -20,7 +21,7 @@ export default function Login() {
     dispatch(loginStart());
 
     try {
-      const response = await axios.post('http://localhost:8080/api/auth/login', formData);
+      const response = await axios.post(`${API_BASE_URL}/api/auth/login`, formData);
       const { token, ...user } = response.data.data;
       
       // If email is not verified, redirect to verification page

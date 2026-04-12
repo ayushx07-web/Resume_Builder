@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { toast } from 'react-toastify';
 
 export default function AdminPanel() {
@@ -14,7 +15,7 @@ export default function AdminPanel() {
 
   const fetchStats = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/admin/analytics', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`${API_BASE_URL}/api/admin/analytics`, { headers: { Authorization: `Bearer ${token}` } });
       setStats(res.data.data || {});
     } catch { setStats({ totalUsers: 0, totalResumes: 0 }); }
   };
@@ -22,7 +23,7 @@ export default function AdminPanel() {
   const fetchUsers = async () => {
     setLoading(true);
     try {
-      const res = await axios.get('http://localhost:8080/api/admin/users', { headers: { Authorization: `Bearer ${token}` } });
+      const res = await axios.get(`${API_BASE_URL}/api/admin/users`, { headers: { Authorization: `Bearer ${token}` } });
       setUsers(res.data.data?.content || res.data.data || []);
     } catch { toast.error('Failed to load users'); }
     finally { setLoading(false); }
@@ -30,7 +31,7 @@ export default function AdminPanel() {
 
   const toggleBlock = async (userId, blocked) => {
     try {
-      await axios.put(`http://localhost:8080/api/admin/users/${userId}/block`, {}, { headers: { Authorization: `Bearer ${token}` } });
+      await axios.put(`${API_BASE_URL}/api/admin/users/${userId}/block`, {}, { headers: { Authorization: `Bearer ${token}` } });
       toast.success(blocked ? 'User unblocked' : 'User blocked');
       fetchUsers();
     } catch { toast.error('Failed to update user'); }

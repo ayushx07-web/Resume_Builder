@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { toast } from 'react-toastify';
 
 export default function Dashboard() {
@@ -16,7 +17,7 @@ export default function Dashboard() {
 
   const fetchResumes = async () => {
     try {
-      const res = await axios.get('http://localhost:8080/api/resumes', {
+      const res = await axios.get(`${API_BASE_URL}/api/resumes`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       setResumes(res.data.data?.content || res.data.data || []);
@@ -30,7 +31,7 @@ export default function Dashboard() {
   const deleteResume = async (id) => {
     if (!confirm('Delete this resume?')) return;
     try {
-      await axios.delete(`http://localhost:8080/api/resumes/${id}`, {
+      await axios.delete(`${API_BASE_URL}/api/resumes/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       toast.success('Resume deleted!');

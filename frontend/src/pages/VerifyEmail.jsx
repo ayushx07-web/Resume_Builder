@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { toast } from 'react-toastify';
 
 export default function VerifyEmail() {
@@ -70,7 +71,7 @@ export default function VerifyEmail() {
     }
     setLoading(true);
     try {
-      await axios.post('http://localhost:8080/api/auth/verify-email', {
+      await axios.post(`${API_BASE_URL}/api/auth/verify-email`, {
         email,
         code: codeStr,
       });
@@ -88,7 +89,7 @@ export default function VerifyEmail() {
   const handleResend = async () => {
     setResending(true);
     try {
-      await axios.post('http://localhost:8080/api/auth/resend-verification', { email });
+      await axios.post(`${API_BASE_URL}/api/auth/resend-verification`, { email });
       toast.success('New verification code sent!');
       setCountdown(60);
       setCode(['', '', '', '', '', '']);

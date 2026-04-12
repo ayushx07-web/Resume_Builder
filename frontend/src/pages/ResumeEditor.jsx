@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from 'react';
 import { useSelector } from 'react-redux';
 import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { toast } from 'react-toastify';
 import html2pdf from 'html2pdf.js';
 import { saveAs } from 'file-saver';
@@ -1025,7 +1026,7 @@ export default function ResumeEditor() {
 
   const fetchResume = async () => {
     try {
-      const res = await axios.get(`http://localhost:8080/api/resumes/${id}`, {
+      const res = await axios.get(`${API_BASE_URL}/api/resumes/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = res.data.data;
@@ -1036,7 +1037,7 @@ export default function ResumeEditor() {
 
   const autoSave = async () => {
     try {
-      await axios.put(`http://localhost:8080/api/resumes/${id}`,
+      await axios.put(`${API_BASE_URL}/api/resumes/${id}`,
         { title: resume.title, content: JSON.stringify(resume), templateId: resume.templateId, isDraft: true },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -1061,14 +1062,14 @@ export default function ResumeEditor() {
 
       if (id && id !== 'new') {
         // Update existing resume
-        const res = await axios.put(`http://localhost:8080/api/resumes/${id}`, payload, {
+        const res = await axios.put(`${API_BASE_URL}/api/resumes/${id}`, payload, {
           headers: { Authorization: `Bearer ${token}` }
         });
         console.log('Update response:', res.data);
         toast.success('Resume saved successfully!');
       } else {
         // Create new resume
-        const res = await axios.post('http://localhost:8080/api/resumes', payload, {
+        const res = await axios.post(`${API_BASE_URL}/api/resumes`, payload, {
           headers: { Authorization: `Bearer ${token}` }
         });
         console.log('Create response:', res.data);

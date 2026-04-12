@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { setPremiumAccess } from '../redux/slices/authSlice';
 import { toast } from 'react-toastify';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 
 const plans = [
   { id: 'MONTHLY', name: 'Monthly', price: 299, period: '/month', savings: null },
@@ -25,7 +26,7 @@ export default function Payment() {
       const plan = plans.find(p => p.id === selected);
       
       const res = await axios.post(
-        'http://localhost:8080/api/payments/create-order',
+        `${API_BASE_URL}/api/payments/create-order`,
         { amount: plan.price, paymentType: 'SUBSCRIPTION', description: plan.name + ' Subscription' },
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -42,7 +43,7 @@ export default function Payment() {
         handler: async function (response) {
           try {
             await axios.post(
-              'http://localhost:8080/api/payments/verify',
+              `${API_BASE_URL}/api/payments/verify`,
               {
                 razorpayOrderId: response.razorpay_order_id,
                 razorpayPaymentId: response.razorpay_payment_id,

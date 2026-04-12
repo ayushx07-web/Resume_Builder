@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import axios from 'axios';
+import API_BASE_URL from '../config/api';
 import { toast } from 'react-toastify';
 
 export default function Signup() {
@@ -19,7 +20,7 @@ export default function Signup() {
     setLoading(true);
 
     try {
-      await axios.post('http://localhost:8080/api/auth/signup', formData);
+      await axios.post(`${API_BASE_URL}/api/auth/signup`, formData);
       toast.success('Account created! Check your email for a verification code.');
       navigate('/verify-email', { state: { email: formData.email } });
     } catch (error) {
