@@ -21,12 +21,16 @@ public class EmailService {
     @Value("${app.name:Resume Builder}")
     private String appName;
 
+    @Value("${spring.mail.username}")
+    private String fromEmail;
+
     @Async
     public void sendVerificationEmail(String toEmail, String username, String verificationCode) {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
 
+            helper.setFrom(fromEmail);
             helper.setTo(toEmail);
             helper.setSubject("Verify Your Email - " + appName);
 

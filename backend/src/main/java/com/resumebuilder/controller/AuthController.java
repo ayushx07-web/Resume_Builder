@@ -25,9 +25,10 @@ public class AuthController {
     private final org.springframework.mail.javamail.JavaMailSender javaMailSender;
 
     @GetMapping("/test-email")
-    public ResponseEntity<String> testEmail(@RequestParam String to) {
+    public ResponseEntity<String> testEmail(@RequestParam String to, @Value("${spring.mail.username}") String from) {
         try {
             org.springframework.mail.SimpleMailMessage message = new org.springframework.mail.SimpleMailMessage();
+            message.setFrom(from);
             message.setTo(to);
             message.setSubject("SMTP Diagnostic Test");
             message.setText("If you are receiving this, your Render SMTP settings are 100% correct!");
