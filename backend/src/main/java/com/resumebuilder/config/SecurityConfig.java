@@ -79,20 +79,15 @@ public class SecurityConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        
-        // Handle comma-separated list of origins from config
-        if (allowedOrigins != null && !allowedOrigins.isEmpty()) {
-            configuration.setAllowedOrigins(Arrays.asList(allowedOrigins.split(",")));
-        } else {
-            configuration.setAllowedOrigins(Arrays.asList(
-                "http://localhost:3000",
-                "http://localhost:5173",
-                "https://resume-builder-lake-beta.vercel.app",
-                "https://resume-builder-git-main-ayushx07-webs-projects.vercel.app",
-                "https://resume-builder-as0wts04y-ayushx07-webs-projects.vercel.app"
-            ));
-        }
-        
+
+        // Use pattern matching to support all Vercel preview URLs (they change on every deploy)
+        configuration.setAllowedOriginPatterns(Arrays.asList(
+            "http://localhost:3000",
+            "http://localhost:5173",
+            "https://*.vercel.app",
+            "https://resume-builder-lake-beta.vercel.app"
+        ));
+
         configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         configuration.setAllowCredentials(true);
