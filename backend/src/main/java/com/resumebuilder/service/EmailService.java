@@ -24,6 +24,7 @@ public class EmailService {
     @Value("${spring.mail.from:ayushkandpal68@gmail.com}")
     private String fromEmail;
 
+    @Async
     public void sendVerificationEmail(String toEmail, String username, String verificationCode) {
         try {
             MimeMessage message = javaMailSender.createMimeMessage();

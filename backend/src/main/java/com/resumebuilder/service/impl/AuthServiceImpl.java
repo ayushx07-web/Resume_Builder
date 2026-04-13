@@ -64,8 +64,12 @@ public class AuthServiceImpl implements AuthService {
 
         user = userRepository.save(user);
 
-        // Send verification email synchronously so errors are visible
-        emailService.sendVerificationEmail(user.getEmail(), user.getUsername(), verificationCode);
+        // Send verification email asynchronously - don't fail signup if email fails
+        try {
+            emailService.sendVerificationEmail(user.getEmail(), user.getUsername(), verificationCode);
+        } catch (Exception e) {
+            System.err.println("Failed to send verification email: " + e.getMessage());
+        }
 
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getEmail());
         String token = jwtUtil.generateToken(userDetails);
