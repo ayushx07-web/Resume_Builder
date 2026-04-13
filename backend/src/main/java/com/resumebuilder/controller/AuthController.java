@@ -26,7 +26,7 @@ public class AuthController {
     private final org.springframework.mail.javamail.JavaMailSender javaMailSender;
 
     @GetMapping("/test-email")
-    public ResponseEntity<String> testEmail(@RequestParam String to, @Value("${spring.mail.username}") String from) {
+    public ResponseEntity<String> testEmail(@RequestParam String to, @Value("${spring.mail.from:ayushkandpal68@gmail.com}") String from) {
         try {
             org.springframework.mail.SimpleMailMessage message = new org.springframework.mail.SimpleMailMessage();
             message.setFrom(from);

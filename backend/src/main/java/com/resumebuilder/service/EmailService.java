@@ -21,7 +21,7 @@ public class EmailService {
     @Value("${app.name:Resume Builder}")
     private String appName;
 
-    @Value("${spring.mail.username}")
+    @Value("${spring.mail.from:ayushkandpal68@gmail.com}")
     private String fromEmail;
 
     public void sendVerificationEmail(String toEmail, String username, String verificationCode) {
