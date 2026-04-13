@@ -87,7 +87,9 @@ public class SecurityConfig {
             configuration.setAllowedOrigins(Arrays.asList(
                 "http://localhost:3000",
                 "http://localhost:5173",
-                "https://resume-builder-lake-beta.vercel.app"
+                "https://resume-builder-lake-beta.vercel.app",
+                "https://resume-builder-git-main-ayushx07-webs-projects.vercel.app",
+                "https://resume-builder-as0wts04y-ayushx07-webs-projects.vercel.app"
             ));
         }
         
